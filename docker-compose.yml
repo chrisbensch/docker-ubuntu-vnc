@@ -1,0 +1,11 @@
+PASSWORD DOES NOT WORK
+version: '3'
+services:
+  firefox-vnc:
+    image: chrisbensch/docker-ubuntu-vnc:xfce4
+    restart: always
+    ## the ports are not needed with network_mode host
+    ports:
+      - "80:80"
+    environment:
+      - VNC_PASSWD=$VNC_PASSWD
