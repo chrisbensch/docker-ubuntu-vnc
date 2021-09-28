@@ -3,3 +3,4 @@ tags
 cscope*
 .DS_Store
 .env
+ssl/*
