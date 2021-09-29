@@ -12,7 +12,7 @@ RUN sed -i 's#http://archive.ubuntu.com/ubuntu/#mirror://mirrors.ubuntu.com/mirr
 ENV DEBIAN_FRONTEND noninteractive
 RUN apt update && apt -y dist-upgrade \
   && apt install -y --no-install-recommends --allow-unauthenticated software-properties-common curl apache2-utils \
-  supervisor nginx sudo net-tools zenity xz-utils dbus-x11 x11-utils alsa-utils mesa-utils libgl1-mesa-dri openssh-client
+  supervisor nginx sudo net-tools zenity xz-utils dbus-x11 x11-utils alsa-utils mesa-utils libgl1-mesa-dri openssh-client ca-certificates htop
 
 # install debs error if combine together
 RUN apt install -y --no-install-recommends --allow-unauthenticated xvfb x11vnc \
