@@ -1,10 +1,10 @@
-# Built with arch: amd64 flavor: lxde image: ubuntu:20.04
+# Built with arch: amd64 flavor: lxde image: ${DOCKER_BASE_IMAGE}
 #
 ################################################################################
 # base system
 ################################################################################
-
-FROM ubuntu:20.04 as system
+ARG DOCKER_BASE_IMAGE
+FROM ${DOCKER_BASE_IMAGE} as system
 
 
 
@@ -41,8 +41,8 @@ RUN apt update \
     && rm -rf /var/lib/apt/lists/*
 
 RUN apt update \
-    && apt install -y --no-install-recommends --allow-unauthenticated \
-        lxde gtk2-engines-murrine gnome-themes-standard gtk2-engines-pixbuf gtk2-engines-murrine arc-theme \
+    && apt install -y --allow-unauthenticated \
+        xubuntu-desktop openbox lxpanel pcmanfm gtk2-engines-murrine gnome-themes-standard gtk2-engines-pixbuf gtk2-engines-murrine arc-theme \
     && apt autoclean -y \
     && apt autoremove -y \
     && rm -rf /var/lib/apt/lists/*
@@ -52,7 +52,7 @@ RUN apt update \
 # libreoffice  pinta language-pack-zh-hant language-pack-gnome-zh-hant firefox-locale-zh-hant libreoffice-l10n-zh-tw
 
 # tini to fix subreap
-ARG TINI_VERSION=v0.18.0
+ARG TINI_VERSION=v0.19.0
 ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /bin/tini
 RUN chmod +x /bin/tini
 
@@ -82,7 +82,7 @@ RUN apt-get update \
 ################################################################################
 # builder
 ################################################################################
-FROM ubuntu:20.04 as builder
+FROM ${DOCKER_BASE_IMAGE} as builder
 
 
 RUN sed -i 's#http://archive.ubuntu.com/ubuntu/#mirror://mirrors.ubuntu.com/mirrors.txt#' /etc/apt/sources.list;
@@ -114,7 +114,7 @@ RUN sed -i 's#app/locale/#novnc/app/locale/#' /src/web/dist/static/novnc/app/ui.
 # merge
 ################################################################################
 FROM system
-LABEL maintainer="fcwu.tw@gmail.com"
+LABEL maintainer="Chris Bensch <chris.bensch@gmail.com>"
 
 COPY --from=builder /src/web/dist/ /usr/local/lib/web/frontend/
 COPY rootfs /
