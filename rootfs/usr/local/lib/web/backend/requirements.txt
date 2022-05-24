@@ -4,9 +4,9 @@ chardet==3.0.4
 Click==7.0
 Flask==1.1.1
 Flask-Login==0.4.1
-gevent==1.4.0
-gevent-websocket==0.10.1
-greenlet==0.4.15
+gevent
+gevent-websocket
+greenlet
 idna==2.8
 itsdangerous==1.1.0
 Jinja2==2.11.3

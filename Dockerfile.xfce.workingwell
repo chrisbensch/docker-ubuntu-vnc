@@ -4,19 +4,19 @@
 # base system
 ################################################################################
 
-FROM ubuntu:20.04 as system
+FROM ubuntu:22.04 as system
 
 RUN sed -i 's#http://archive.ubuntu.com/ubuntu/#mirror://mirrors.ubuntu.com/mirrors.txt#' /etc/apt/sources.list;
 
 # built-in packages
 ENV DEBIAN_FRONTEND noninteractive
 RUN apt update && apt -y dist-upgrade \
-  && apt install -y --no-install-recommends --allow-unauthenticated software-properties-common curl apache2-utils \
+  && apt install -y --no-install-recommends --allow-unauthenticated ca-certificates software-properties-common curl apache2-utils \
   supervisor nginx sudo net-tools zenity xz-utils dbus-x11 x11-utils alsa-utils mesa-utils libgl1-mesa-dri 
 
 # install debs error if combine together
-RUN apt install -y --no-install-recommends --allow-unauthenticated xvfb x11vnc \
-  vim-tiny firefox ttf-ubuntu-font-family ttf-wqy-zenhei \
+RUN apt install -y --no-install-recommends --allow-unauthenticat443ed xvfb x11vnc \
+  vim-tiny firefox \
   gtk2-engines-murrine \
   gnome-themes-standard \
   gtk2-engines-pixbuf \

@@ -4,11 +4,12 @@ services:
     image: 'chrisbensch/docker-ubuntu-vnc:xfce4'
     privileged: true
     ports:
-      - '443:443'
+      #- '443:443'
+      - '80:80'
     environment:
-      - SSL_PORT=443
+      #- SSL_PORT=443
       - USER=ubuntu
       - PASSWORD=password
-      - VNC_PASSWORD=
+      - VNC_PASSWORD=Hq63mtMNn1Dj1qVT2X327TUA02nMfuXd
     volumes:
       - '/home/cnd/ubuntu-data:/home/ubuntu'
