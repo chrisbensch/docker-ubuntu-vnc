@@ -4,7 +4,7 @@
 # base system
 ################################################################################
 
-FROM ubuntu:22.04 as system
+FROM ubuntu:20.04 as system
 
 RUN sed -i 's#http://archive.ubuntu.com/ubuntu/#mirror://mirrors.ubuntu.com/mirrors.txt#' /etc/apt/sources.list;
 
@@ -15,7 +15,7 @@ RUN apt update && apt -y dist-upgrade \
   supervisor nginx sudo net-tools zenity xz-utils dbus-x11 x11-utils alsa-utils mesa-utils libgl1-mesa-dri 
 
 # install debs error if combine together
-RUN apt install -y --no-install-recommends --allow-unauthenticat443ed xvfb x11vnc \
+RUN apt install -y --no-install-recommends --allow-unauthenticated xvfb x11vnc \
   vim-tiny firefox \
   gtk2-engines-murrine \
   gnome-themes-standard \
@@ -43,7 +43,7 @@ RUN apt install -y --no-install-recommends --allow-unauthenticat443ed xvfb x11vn
   apt-transport-https \
   software-properties-common
 
-RUN apt install -y --no-install-recommends --allow-unauthenticated \
+RUN apt install -y \
   xfce4 \
   arc-theme \
   xubuntu-desktop \
